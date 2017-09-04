@@ -17,7 +17,7 @@ public class TriangulaAParada {
 //		minasDir = ordenador.sort(minas, 1).clone();
 		minasEsq = ordenador.sort(minas, 2).clone();
 		minasDir = ordenador.sort(minas, 3).clone();
-		limite = auxDoLeitor.getTamCampoX();
+		limite = auxDoLeitor.getTamCampoX() -1;
 		chamaGod();
 	}
 	
@@ -29,8 +29,8 @@ public class TriangulaAParada {
 				analisaArea(2, i, 0);
 				System.out.println(cont);
 				cont = 0;
-				if(!listaLimites.isEmpty()) limite = listaLimites.remove(0);
-				else limite = auxDoLeitor.getTamCampoX();
+				if(listaLimites.isEmpty()) limite = auxDoLeitor.getTamCampoX();
+				else limite = listaLimites.remove(0);
 			} while(limite != auxDoLeitor.getTamCampoX());
 		}
 	}
@@ -60,47 +60,46 @@ public class TriangulaAParada {
 			y = minasOrdenadas[aPoderosa].getY();
 		}
 		
-		if(y < minasOrdenadas[aPoderosa].getY()) {
-			minasOrdenadas = minasAntagonicas;
-			if(aPoderosa+1 == minasOrdenadas.length) {return;}
-		}
+//		if(y < minasOrdenadas[aPoderosa].getY()) {
+//			minasOrdenadas = minasAntagonicas;
+//			if(aPoderosa+1 == minasOrdenadas.length) {return;}
+//		}
 		
-		for(int i = aPoderosa+1; i < minasOrdenadas.length && minasOrdenadas[i].getX() < limite; i++) {
+		for(int i = aPoderosa+1; i < minasOrdenadas.length; i++) {
 				
-			if(minasOrdenadas[i].getY() == y) {
+			if(minasOrdenadas[i].getY() == y && minasOrdenadas[i].getX() < limite) {
 				if(cont == 0) limite = minasOrdenadas[i].getX(); 
 				else {
 					listaLimites.add(minasOrdenadas[i].getX()); 
 					return;
 				}
 				//Atualiza o cont
-				cont += minasOrdenadas[i].getX() - minasOrdenadas[aPoderosa].getX() +1;
+				cont += minasOrdenadas[i].getX() - minasOrdenadas[aPoderosa].getX() - 1;
 				
-				aPoderosa++;
 				//Chama a recursão
 				if(y >= minasOrdenadas[aPoderosa].getY()) {
 					analisaArea(direcao, aPoderosa, y+1);
 				}
 				if(y <= minasOrdenadas[aPoderosa].getY()) {
-					for(int j=0; i<minasAntagonicas.length; j++) {
-						if(minasAntagonicas[j] == minasOrdenadas[aPoderosa]) aPoderosa = j;
-					}
+//					for(int j=0; i<minasAntagonicas.length; j++) {
+//						if(minasAntagonicas[j] == minasOrdenadas[aPoderosa]) aPoderosa = j;
+//					}
 					analisaArea(direcao, aPoderosa, y-1);
 				}		
 				return;
 			}
-			else {
-				cont += (limite-1) - minasOrdenadas[aPoderosa].getX();
-				if(y >= minasOrdenadas[aPoderosa].getY()) {
+			else if(i == minasOrdenadas.length-1){
+				cont += limite - minasOrdenadas[aPoderosa].getX() -1;
+				if(y >= minasOrdenadas[aPoderosa].getY() && y <= auxDoLeitor.getTamCampoY()) {
 					analisaArea(direcao, aPoderosa, y+1);
 				}
 				if(y <= minasOrdenadas[aPoderosa].getY() && y >= 0) {
-					for(int j=0; i<minasAntagonicas.length; j++) {
-						if(minasAntagonicas[j].equals(minasOrdenadas[aPoderosa])) {
-							aPoderosa = j; 
-							break;
-						}
-					}
+//					for(int j=0; i<minasAntagonicas.length; j++) {
+//						if(minasAntagonicas[j].equals(minasOrdenadas[aPoderosa])) {
+//							aPoderosa = j; 
+//							break;
+//						}
+//					}
 					analisaArea(direcao, aPoderosa, y-1);
 				}	
 				return;

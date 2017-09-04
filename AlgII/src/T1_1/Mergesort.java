@@ -128,21 +128,21 @@ public class Mergesort {
 //        System.out.println(end-start);
 //    }
     
-    public static void main(String args[]) {
-    	Mina[] minas = new Mina[7];
-    	minas[0] = new Mina(5,1);
-    	minas[1] = new Mina(3,4);
-    	minas[2] = new Mina(2,1);
-    	minas[3] = new Mina(1,3);
-    	minas[4] = new Mina(5,4);
-    	minas[5] = new Mina(2,5);
-    	minas[6] = new Mina(1,4);
-    	Mergesort ms = new Mergesort();
-    	Mina[] auxMina = minas.clone();
-    	Mina[] printadora = ms.sort(auxMina,2);
-    	for(int i=0; i<7; i++) {
-    		System.out.println(printadora[i].toString() + "\n");
-    	}
-    }
+//    public static void main(String args[]) {
+//    	Mina[] minas = new Mina[7];
+//    	minas[0] = new Mina(5,1);
+//    	minas[1] = new Mina(3,4);
+//    	minas[2] = new Mina(2,1);
+//    	minas[3] = new Mina(1,3);
+//    	minas[4] = new Mina(5,4);
+//    	minas[5] = new Mina(2,5);
+//    	minas[6] = new Mina(1,4);
+//    	Mergesort ms = new Mergesort();
+//    	Mina[] auxMina = minas.clone();
+//    	Mina[] printadora = ms.sort(auxMina,2);
+//    	for(int i=0; i<7; i++) {
+//    		System.out.println(printadora[i].toString() + "\n");
+//    	}
+//    }
 }
 
